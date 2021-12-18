@@ -1,0 +1,28 @@
+<div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+  <%= f = form_for @changeset, "#",
+    id: "repository-form",
+    phx_target: @myself,
+    phx_change: "validate",
+    phx_submit: "save" %>
+
+    <div class="modal-content py-4 text-left px-6">
+      <div class="flex justify-between items-center pb-3">
+        <h3 class="leading-6 font-medium text-gray-900" id="modal-title">Edit tags for <%= text_input f, :name, class: "leading-6 font-medium text-gray-900" %> </h3>
+
+      </div>
+
+      <div class="mt-1 ">
+        <%= textarea f,
+          :tags,
+          class: "text-sm text-gray-500 resize-none border rounded-md sm:w-full px-2",
+          placeholder: "tags",
+          value: Enum.join(@repository.tags, ", ")%>
+      </div>
+
+      <div class="inline-flex sm:w-full items-end justify-center mt-2">
+        <%= submit "Save", class: "py-1 px-4 border-gray-300 border text-indigo-500 hover:bg-gray-100 font-bold hover:text-indigo-400 mr-2", phx_disable_with: "Saving..." %>
+        <button data-dismiss="modal" phx-capture-click="close"  phx-target="<%= @myself %>" class="modal-close border-gray-300 border hover:bg-gray-100 text-gray-800 hover:text-gray-600 font-bold py-1 px-2">Cancel</button>
+      </div>
+
+  </form>
+</div>
